@@ -1,0 +1,266 @@
+:root {
+  --bg-darkest: #0f172a;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  background-color: var(--bg-darkest);
+  color: #fff;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.workspace-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  background-color: rgba(15, 23, 42, 0.6);
+  padding: 1.5rem;
+  border-radius: 1.5rem;
+  border: 1px solid #1e293b;
+}
+
+/* Physical Phone Chassis */
+.phone-chassis {
+  width: 310px;
+  height: 645px;
+  background-color: #1e293b;
+  border-radius: 40px;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  border: 4px solid #334155;
+  box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.8), 0 20px 40px rgba(0, 0, 0, 0.6);
+}
+
+.phone-speaker-grille {
+  width: 90px;
+  height: 8px;
+  background-color: #020617;
+  border-radius: 9999px;
+  margin-bottom: 0.75rem;
+}
+
+/* Screen Window with standard 240x320 resolution display layout */
+.kaios-display-screen {
+  width: 240px;
+  height: 320px;
+  box-sizing: content-box;
+  background-color: #166534; /* Classic Green Solitaire Felt */
+  color: #ffffff;
+  overflow: hidden;
+  position: relative;
+  user-select: none;
+  font-family: ui-monospace, monospace;
+  font-size: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border: 4px solid #020617;
+  border-radius: 6px;
+}
+
+/* Status Bar */
+.screen-status-bar {
+  height: 18px;
+  background-color: rgba(2, 6, 23, 0.85);
+  padding: 0 0.4rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(15, 87, 40, 0.2);
+  font-size: 8px;
+  font-weight: bold;
+  flex-shrink: 0;
+}
+
+/* Stage Area inside the screen */
+.screen-game-stage {
+  flex: 1;
+  position: relative;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.screen-game-stage canvas {
+  display: block;
+}
+
+/* Softkey Nav Bar */
+.softkey-nav-bar {
+  height: 22px;
+  background-color: #020617;
+  padding: 0 0.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 9px;
+  font-weight: bold;
+  border-top: 1px solid #1e293b;
+  flex-shrink: 0;
+  z-index: 10;
+}
+
+.softkey-btn {
+  background: none;
+  border: none;
+  font-size: 9px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.softkey-btn.left { color: #34d399; }
+.softkey-btn.center { color: #fbbf24; }
+.softkey-btn.right { color: #34d399; }
+
+/* Phone Keypad Controls & Keyboard emulation */
+.phone-keypad-panel {
+  width: 100%;
+  margin-top: 0.75rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.keypad-softkeys-cluster {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0 0.5rem;
+}
+
+.hard-softkey-button {
+  height: 32px;
+  background-color: rgba(51, 65, 85, 0.8);
+  border: none;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 2px solid #0f172a;
+  cursor: pointer;
+  color: #cbd5e1;
+  font-size: 8px;
+}
+
+/* Circular D-Pad Layout */
+.dpad-container {
+  position: relative;
+  width: 72px;
+  height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+}
+
+.dpad-ring-base {
+  position: absolute;
+  inset: 0;
+  background-color: #0f172a;
+  border-radius: 50%;
+  border: 1px solid #475569;
+}
+
+.dpad-arrow-btn {
+  position: absolute;
+  background-color: #334155;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #fff;
+  font-size: 10px;
+}
+
+.dpad-arrow-btn.up { top: 0; left: 50%; transform: translateX(-50%); width: 28px; height: 22px; border-top-left-radius: 8px; border-top-right-radius: 8px; }
+.dpad-arrow-btn.down { bottom: 0; left: 50%; transform: translateX(-50%); width: 28px; height: 22px; border-bottom-left-radius: 8px; border-bottom-right-radius: 8px; }
+.dpad-arrow-btn.left { left: 0; top: 50%; transform: translateY(-50%); width: 22px; height: 28px; border-top-left-radius: 8px; border-bottom-left-radius: 8px; }
+.dpad-arrow-btn.right { right: 0; top: 50%; transform: translateY(-50%); width: 22px; height: 28px; border-top-right-radius: 8px; border-bottom-right-radius: 8px; }
+
+.dpad-ok-center-btn {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background-color: #f59e0b;
+  border: 1px solid #d97706;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10;
+  font-weight: bold;
+  font-size: 10px;
+  color: #020617;
+}
+
+.call-end-keypad-row {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.4rem;
+  padding: 0 0.75rem;
+  margin-top: 0.25rem;
+}
+
+.action-status-btn {
+  height: 26px;
+  border: none;
+  border-radius: 4px;
+  font-size: 8px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.action-status-btn.call-new { background-color: rgba(6, 78, 59, 0.8); color: #34d399; }
+.action-status-btn.undo-back { background-color: #334155; color: #cbd5e1; }
+.action-status-btn.end-clear { background-color: rgba(127, 29, 29, 0.8); color: #fca5a5; }
+
+/* Numeric Grid Pad T9 */
+.numeric-t9-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.35rem;
+  padding: 0 1rem;
+  margin-top: 0.4rem;
+}
+
+.t9-button {
+  height: 30px;
+  background-color: rgba(15, 23, 42, 0.9);
+  border: 1px solid #334155;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.t9-num-label {
+  font-size: 11px;
+  font-weight: 900;
+  color: #f1f5f9;
+}
+
+.t9-sub-label {
+  font-size: 6px;
+  color: #64748b;
+}
+

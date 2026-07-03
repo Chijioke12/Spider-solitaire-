@@ -1,0 +1,6 @@
+{
+  "name": "KaiOS Spider Solitaire",
+  "description": "A retro-themed retro card Spider Solitaire simulator with physical keypad hardware inputs, built using Phaser and Preact.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

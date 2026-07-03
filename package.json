@@ -1,0 +1,38 @@
+{
+  "name": "react-example",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite --port=3000 --host=0.0.0.0",
+    "generate-icons": "tsx scripts/generate-icons.ts",
+    "generate-assets": "tsx generate-spritesheet.ts && npm run generate-icons",
+    "build": "npm run generate-assets && vite build && node scripts/clean-ui.cjs",
+    "build:omnisd": "npm run build && node scripts/build-omnisd.mjs",
+    "preview": "vite preview",
+    "clean": "rm -rf dist server.js omnisd_build",
+    "lint": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@google/genai": "^2.4.0",
+    "dotenv": "^17.2.3",
+    "express": "^4.21.2",
+    "lucide-react": "^0.546.0",
+    "motion": "^12.23.24",
+    "phaser": "3.24.1",
+    "preact": "^10.29.4",
+    "vite": "^6.2.3"
+  },
+  "devDependencies": {
+    "@preact/preset-vite": "^2.10.5",
+    "@types/express": "^4.17.21",
+    "@types/node": "^22.14.0",
+    "@vitejs/plugin-legacy": "^6.1.1",
+    "archiver": "^8.0.0",
+    "esbuild": "^0.25.0",
+    "pngjs": "^7.0.0",
+    "tsx": "^4.21.0",
+    "typescript": "~5.8.2",
+    "vite": "^6.2.3"
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "name": "KaiOS App",
+  "description": "A KaiOS game",
+  "version": "1.0.0",
+  "launch_path": "/index.html",
+  "icons": {
+    "56": "/icon-56.png",
+    "112": "/icon-112.png"
+  },
+  "developer": {
+    "name": "Developer",
+    "url": "http://example.com"
+  },
+  "type": "web",
+  "fullscreen": "true",
+  "permissions": {},
+  "locales": {
+    "en-US": {
+      "name": "KaiOS App",
+      "description": "A KaiOS game"
+    }
+  },
+  "default_locale": "en-US"
+}
