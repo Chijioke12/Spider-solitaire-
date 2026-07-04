@@ -57,7 +57,7 @@ body {
 .kaios-display-screen {
   width: 240px;
   height: 320px;
-  box-sizing: content-box;
+  box-sizing: border-box;
   background-color: #166534; /* Classic Green Solitaire Felt */
   color: #ffffff;
   overflow: hidden;
@@ -67,7 +67,7 @@ body {
   font-size: 10px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: flex-start;
   border: 4px solid #020617;
   border-radius: 6px;
 }

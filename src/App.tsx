@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'preact/hooks';
-import Phaser from 'phaser';
+
+declare const Phaser: any;
 
 type Suit = 'spades' | 'hearts' | 'diamonds' | 'clubs';
 
@@ -419,7 +420,7 @@ class SolitaireScene extends Phaser.Scene {
 
     const dealsLeft = this.stock.length / 10;
     const startX = 15 + (dealsLeft - 1) * 3;
-    const startY = 212;
+    const startY = 270;
 
     const cardsToDeal: CardData[] = [];
     const currentStock = [...this.stock];
@@ -447,7 +448,7 @@ class SolitaireScene extends Phaser.Scene {
       const colX = leftMargin + targetColIdx * (colWidth + colSpacing) + colWidth / 2;
       
       const nextOverlap = this.getCardOverlap(targetCol.length + 1);
-      const cardY = 22 + targetCol.length * nextOverlap;
+      const cardY = 48 + targetCol.length * nextOverlap;
 
       const tempCard = this.add.sprite(startX, startY, 'cards', 52);
       tempCard.setDepth(200);
@@ -663,7 +664,7 @@ class SolitaireScene extends Phaser.Scene {
     const suitRows: Suit[] = ['spades', 'hearts', 'diamonds', 'clubs'];
 
     cardsToMove.forEach((card, idx) => {
-      const startLocalY = 22 + (startCardIdx + idx) * fromOverlap;
+      const startLocalY = 48 + (startCardIdx + idx) * fromOverlap;
       const row = suitRows.indexOf(card.suit);
       const col = card.rank - 1;
       const frameIdx = row * 13 + col;
@@ -684,7 +685,7 @@ class SolitaireScene extends Phaser.Scene {
     let animCompleteCount = 0;
     cardsToMove.forEach((card, idx) => {
       const childSprite = movingContainer.list[idx] as Phaser.GameObjects.Sprite;
-      const targetLocalY = 22 + (toCol.length + idx) * toOverlap;
+      const targetLocalY = 48 + (toCol.length + idx) * toOverlap;
 
       this.tweens.add({
         targets: childSprite,
@@ -700,7 +701,7 @@ class SolitaireScene extends Phaser.Scene {
 
             if (fromCol.length > 0 && !fromCol[fromCol.length - 1].visible) {
               const flipColX = leftMargin + fromColIdx * (colWidth + colSpacing) + colWidth / 2;
-              const flipCardY = 22 + (fromCol.length - 1) * fromOverlap;
+              const flipCardY = 48 + (fromCol.length - 1) * fromOverlap;
 
               const flipSprite = this.add.sprite(flipColX, flipCardY, 'cards', 52);
               flipSprite.setDepth(200);
@@ -820,16 +821,16 @@ class SolitaireScene extends Phaser.Scene {
       const colX = leftMargin + colIdx * (colWidth + colSpacing) + colWidth / 2;
       const overlap = this.getCardOverlap(col.length);
 
-      this.triggerSparklesAt(colX, 22 + (startIdx + 6) * overlap);
+      this.triggerSparklesAt(colX, 48 + (startIdx + 6) * overlap);
 
       const nextCompIdx = this.completed.length;
       const targetX = 225 - nextCompIdx * 4;
-      const targetY = 212;
+      const targetY = 270;
 
       const tempSprites: Phaser.GameObjects.Sprite[] = [];
 
       cardsToClear.forEach((card, idx) => {
-        const cardY = 22 + (startIdx + idx) * overlap;
+        const cardY = 24 + (startIdx + idx) * overlap;
         const suitRows: Suit[] = ['spades', 'hearts', 'diamonds', 'clubs'];
         const r = suitRows.indexOf(card.suit);
         const c = card.rank - 1;
@@ -867,7 +868,7 @@ class SolitaireScene extends Phaser.Scene {
               if (col.length > 0 && !col[col.length - 1].visible) {
                 const flipColX = leftMargin + colIdx * (colWidth + colSpacing) + colWidth / 2;
                 const flipOverlap = this.getCardOverlap(col.length);
-                const flipCardY = 22 + (col.length - 1) * flipOverlap;
+                const flipCardY = 48 + (col.length - 1) * flipOverlap;
 
                 const flipSprite = this.add.sprite(flipColX, flipCardY, 'cards', 52);
                 flipSprite.setDepth(200);
@@ -921,11 +922,11 @@ class SolitaireScene extends Phaser.Scene {
       const x = leftMargin + i * (colWidth + colSpacing) + colWidth / 2;
       const overlap = this.getCardOverlap(col.length);
       
-      const emptySprite = this.add.sprite(x, 22, 'cards', 53);
+      const emptySprite = this.add.sprite(x, 48, 'cards', 53);
       this.cardsGroup.add(emptySprite);
 
       col.forEach((card, j) => {
-        const y = 22 + j * overlap;
+        const y = 48 + j * overlap;
         
         let frameIdx = 52;
         if (card.visible) {
@@ -943,16 +944,16 @@ class SolitaireScene extends Phaser.Scene {
     const dealsLeft = this.stock.length / 10;
     
     // Draw empty stock placeholder
-    const emptyStockSprite = this.add.sprite(15, 212, 'cards', 53);
+    const emptyStockSprite = this.add.sprite(15, 270, 'cards', 53);
     this.cardsGroup.add(emptyStockSprite);
 
     for (let i = 0; i < dealsLeft; i++) {
-      const stockSprite = this.add.sprite(15 + i * 3, 212, 'cards', 52);
+      const stockSprite = this.add.sprite(15 + i * 3, 270, 'cards', 52);
       this.cardsGroup.add(stockSprite);
     }
 
     if (dealsLeft > 0) {
-      const stockText = this.add.text(15, 194, `DEALS:${dealsLeft}`, { fontSize: '7px', color: '#ffffff', fontFamily: 'monospace' }).setOrigin(0.5, 0.5);
+      const stockText = this.add.text(15, 252, `DEALS:${dealsLeft}`, { fontSize: '7px', color: '#ffffff', fontFamily: 'monospace' }).setOrigin(0.5, 0.5);
       this.cardsGroup.add(stockText);
     }
 
@@ -960,7 +961,7 @@ class SolitaireScene extends Phaser.Scene {
       const suitRows: Suit[] = ['spades', 'hearts', 'diamonds', 'clubs'];
       const row = suitRows.indexOf(suit);
       const frameIdx = row * 13 + 12;
-      const compSprite = this.add.sprite(225 - idx * 4, 212, 'cards', frameIdx);
+      const compSprite = this.add.sprite(225 - idx * 4, 270, 'cards', frameIdx);
       this.cardsGroup.add(compSprite);
     });
 
@@ -981,8 +982,8 @@ class SolitaireScene extends Phaser.Scene {
       const fromX = leftMargin + this.selectedCol * (colWidth + colSpacing) + colWidth / 2;
       const col = this.tableau[this.selectedCol];
       const overlap = this.getCardOverlap(col.length);
-      const startY = 22 + this.selectedCardIdx * overlap;
-      const endY = col.length > 0 ? (22 + (col.length - 1) * overlap) : 22;
+      const startY = 48 + this.selectedCardIdx * overlap;
+      const endY = col.length > 0 ? (48 + (col.length - 1) * overlap) : 48;
       const rectH = (endY - startY) + 28;
 
       this.selectionIndicator.lineStyle(2, 0x3b82f6, this.pulseValue);
@@ -997,7 +998,7 @@ class SolitaireScene extends Phaser.Scene {
             const targetCol = this.tableau[i];
             const targetX = leftMargin + i * (colWidth + colSpacing) + colWidth / 2;
             const targetOverlap = this.getCardOverlap(targetCol.length);
-            const targetY = targetCol.length > 0 ? (22 + (targetCol.length - 1) * targetOverlap) : 22;
+            const targetY = targetCol.length > 0 ? (48 + (targetCol.length - 1) * targetOverlap) : 48;
             const cardH = 28;
 
             let highlightColor = 0x10b981; // emerald green for perfect suit match
@@ -1023,14 +1024,14 @@ class SolitaireScene extends Phaser.Scene {
     const overlap = this.getCardOverlap(col.length);
     
     if (this.selectedCol === null) {
-      const currentY = col.length > 0 ? (22 + this.cursorCardIdx * overlap) : 22;
+      const currentY = col.length > 0 ? (48 + this.cursorCardIdx * overlap) : 48;
       const cardH = 28;
 
       this.cursorIndicator.lineStyle(2, 0xfbbf24, this.pulseValue);
       this.cursorIndicator.strokeRoundedRect(currentX - cardW / 2 - 1, currentY - cardH / 2 - 1, cardW + 2, cardH + 2, 4);
     } else {
-      const startY = 22;
-      const endY = col.length > 0 ? (22 + (col.length - 1) * overlap) : 22;
+      const startY = 48;
+      const endY = col.length > 0 ? (48 + (col.length - 1) * overlap) : 48;
       const rectH = col.length > 0 ? (endY - startY + 28) : 28;
 
       this.cursorIndicator.lineStyle(2, 0x10b981, this.pulseValue);
@@ -1047,14 +1048,14 @@ class SolitaireScene extends Phaser.Scene {
         const sourceCol = this.tableau[fromCol];
         const sourceOverlap = this.getCardOverlap(sourceCol ? sourceCol.length : 0);
         const sourceX = leftMargin + fromCol * (colWidth + colSpacing) + colWidth / 2;
-        const sourceYStart = 22 + fromCardIdx * sourceOverlap;
-        const sourceYEnd = (sourceCol && sourceCol.length > 0) ? (22 + (sourceCol.length - 1) * sourceOverlap) : 22;
+        const sourceYStart = 48 + fromCardIdx * sourceOverlap;
+        const sourceYEnd = (sourceCol && sourceCol.length > 0) ? (48 + (sourceCol.length - 1) * sourceOverlap) : 48;
         const sourceRectH = (sourceYEnd - sourceYStart) + 28;
 
         const targetCol = this.tableau[toCol];
         const targetOverlap = this.getCardOverlap(targetCol ? targetCol.length : 0);
         const targetX = leftMargin + toCol * (colWidth + colSpacing) + colWidth / 2;
-        const targetY = (targetCol && targetCol.length > 0) ? (22 + (targetCol.length - 1) * targetOverlap) : 22;
+        const targetY = (targetCol && targetCol.length > 0) ? (48 + (targetCol.length - 1) * targetOverlap) : 48;
         const targetRectH = 28;
 
         const flashAlpha = 0.5 + 0.5 * Math.abs(Math.sin(this.time.now / 150));
@@ -1106,7 +1107,7 @@ export default function App() {
     const config: Phaser.Types.Core.GameConfig = {
       type: Phaser.WEBGL,
       width: 240,
-      height: 244, // Perfectly sized for 320 total height with stats & status & softkeys
+      height: 320,
       parent: gameContainerRef.current,
       backgroundColor: '#166534',
       transparent: true,
@@ -1144,8 +1145,8 @@ export default function App() {
       else if (e.key === 'ArrowLeft') game.events.emit('move', 'left');
       else if (e.key === 'ArrowRight') game.events.emit('move', 'right');
       else if (e.key === 'Enter') game.events.emit('action');
-      else if (e.key === '1') game.events.emit('deal');
-      else if (e.key === '3') game.events.emit('undo');
+      else if (e.key === '1' || e.key === 'SoftLeft') game.events.emit('deal');
+      else if (e.key === '3' || e.key === 'SoftRight') game.events.emit('undo');
       else if (e.key === '5' || e.key.toLowerCase() === 'h') game.events.emit('hint');
       else if (e.key === 'Backspace' || e.key === 'Escape') game.events.emit('clear');
     };
@@ -1214,9 +1215,9 @@ export default function App() {
         <div className="phone-speaker-grille"></div>
 
         {/* The 240x320 KaiOS Display Panel */}
-        <div className="kaios-display-screen">
-          {/* Status Bar */}
-          <div className="screen-status-bar">
+        <div className="kaios-display-screen" style={{ position: 'relative' }}>
+          {/* Status Bar - Overlay */}
+          <div className="screen-status-bar" style={{ position: 'absolute', top: 0, left: 0, right: 0, zIndex: 50, backgroundColor: 'rgba(2, 6, 23, 0.8)' }}>
             <span>SPIDER</span>
             <span>
               SCORE: <span style={{ color: '#fcd34d' }}>{score}</span>
@@ -1224,28 +1225,32 @@ export default function App() {
           </div>
 
           <div style={{
+            position: 'absolute',
+            top: '18px',
+            left: 0,
+            right: 0,
             display: 'flex',
             justifyContent: 'space-between',
             padding: '2px 4px',
-            backgroundColor: 'rgba(0,0,0,0.3)',
+            backgroundColor: 'rgba(0,0,0,0.5)',
             fontSize: '8px',
             height: '14px',
             boxSizing: 'border-box',
-            flexShrink: 0
+            zIndex: 45
           }}>
             <span>Mv: {moves}</span>
             <span>Comp: {completed.length}/8</span>
             <span>Stk: {stockCount}</span>
           </div>
 
-          <div className="screen-game-stage" ref={gameContainerRef}></div>
+          <div className="screen-game-stage" ref={gameContainerRef} style={{ width: '240px', height: '320px' }}></div>
 
           {hasWon && (
             <div style={{
               position: 'absolute', inset: 0,
               backgroundColor: 'rgba(2, 6, 23, 0.95)',
               display: 'flex', flexDirection: 'column',
-              alignItems: 'center', justifyContent: 'center', zIndex: 50
+              alignItems: 'center', justifyContent: 'center', zIndex: 60
             }}>
               <div style={{ color: '#fbbf24', fontSize: '14px', fontWeight: 'bold' }}>VICTORY!</div>
               <div style={{ color: '#cbd5e1', fontSize: '10px', marginTop: '4px' }}>Moves: {moves}</div>
@@ -1258,8 +1263,8 @@ export default function App() {
             </div>
           )}
 
-          {/* Softkey Label Bar */}
-          <div className="softkey-nav-bar">
+          {/* Softkey Label Bar - Overlay */}
+          <div className="softkey-nav-bar" style={{ position: 'absolute', bottom: 0, left: 0, right: 0, zIndex: 50, backgroundColor: 'rgba(2, 6, 23, 0.9)', height: '22px' }}>
             <span className="softkey-btn left">{selectedCol !== null ? 'CANCEL' : 'DEAL'}</span>
             <span className="softkey-btn center">{selectedCol !== null ? 'PLACE' : 'SELECT'}</span>
             <span className="softkey-btn right">{selectedCol !== null ? 'AUTO-MOVE' : 'UNDO'}</span>
