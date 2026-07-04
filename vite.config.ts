@@ -8,7 +8,7 @@ export default defineConfig(() => {
     plugins: [
       preact(),
       legacy({
-        targets: ['defaults', 'not IE 11']
+        targets: ['firefox 48']
       })
     ],
     resolve: {
